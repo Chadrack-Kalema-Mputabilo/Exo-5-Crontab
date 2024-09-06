@@ -1,0 +1,55 @@
+Pour créer un script qui affiche "Hello World", le journaliser, et configurer un cron job pour l'exécuter, suivez ces étapes :
+
+### Étapes pour configurer un cron job
+
+1. **Créer le script** :
+   Créez un fichier de script, par exemple `hello_world.sh`.
+
+   ```bash
+   nano ~/hello_world.sh
+   ```
+
+   Ajoutez le code suivant dans ce fichier :
+
+   ```bash
+   #!/bin/bash
+   echo "Hello World" >> ~/hello_world.log
+   echo "$(date): Script executed" >> ~/hello_world.log
+   ```
+
+   Enregistrez et fermez l'éditeur (dans `nano`, utilisez `CTRL + X`, puis `Y` pour confirmer).
+
+2. **Rendre le script exécutable** :
+   Exécutez la commande suivante pour rendre le script exécutable :
+
+   ```bash
+   chmod +x ~/hello_world.sh
+   ```
+
+3. **Configurer le cron job** :
+   Ouvrez le crontab pour l'utilisateur actuel :
+
+   ```bash
+   crontab -e
+   ```
+
+   Ajoutez la ligne suivante pour exécuter le script toutes les minutes :
+
+   ```
+   * * * * * /bin/bash ~/hello_world.sh
+   ```
+
+   Enregistrez et fermez l'éditeur.
+
+4. **Tester avec `tail -f`** :
+   Ouvrez un terminal et exécutez la commande suivante pour voir les logs en temps réel :
+
+   ```bash
+   tail -f ~/hello_world.log
+   ```
+
+   Vous verrez "Hello World" et la date s'afficher dans le fichier `hello_world.log` chaque minute.
+
+### Résumé
+
+Vous avez maintenant configuré un script qui affiche "Hello World", journalise son exécution dans un fichier log, et vous pouvez observer les logs en temps réel avec `tail -f`. Vous pouvez ajuster la fréquence d'exécution du cron job selon vos besoins.
